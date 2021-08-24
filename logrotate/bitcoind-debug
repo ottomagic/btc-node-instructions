@@ -1,0 +1,12 @@
+/var/lib/bitcoind/debug.log
+{
+        rotate 14
+        daily
+        copytruncate
+        missingok
+        notifempty
+        compress
+        delaycompress
+        sharedscripts
+        su bitcoin bitcoin
+}
