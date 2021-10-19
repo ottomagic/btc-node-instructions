@@ -153,15 +153,15 @@ sudo chmod 700 /home/admin
 sudo chmod 750 /home/bitcoin
 ```
 
-### Install bitcoind
+### Option 1: Install bitcoind by downloading and verifying binaries
 
 Official instructions: https://bitcoin.org/en/full-node#linux-instructions
 
 1. Download & verify based on instructions.
-2. Extract the files from the downloaded package to `/home/bitcoin/`.
+2. Extract the files from the downloaded package to `/home/admin/`.
 3. Install bitcoind binaries. Assuming bitcoin core version 0.21.1.
 ```
-cd /home/bitcoin
+cd /home/admin
 sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.21.1/bin/*
 ```
 4. Configure man pages
@@ -169,14 +169,50 @@ sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.21.1/bin/*
 sudo cp -r bitcoin-0.21.1/share/man/man1 /usr/local/share/man/
 mandb
 ```
-5. Create a directory for the bitcoind configuration file:
+
+### Option 2: Install bitcoind by building from source
+
+Documentation: https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
+
+1. Clone the git repository
+```
+cd /home/admin
+git clone https://github.com/bitcoin/bitcoin.git
+```
+2. Checkout the correct version tag. Replace `v22.0` with the desired tag.
+```
+cd bitcoin
+git checkout tags/v22.0 -b tags/v22.0
+```
+3. Install Ubuntu build requirements
+```
+sudo apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+```
+4. Install bitcoind dependencies
+```
+sudo apt-get install libevent-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev
+```
+5. Build bitcoind
+```
+./autogen.sh
+./configure --disable-wallet --without-gui
+make
+```
+5. Install the program
+```
+sudo make install
+```
+
+### Configure bitcoind
+
+1. Create a directory for the bitcoind configuration file:
 ```
 sudo mkdir /etc/bitcoin
 sudo chown bitcoin:bitcoin /etc/bitcoin
 sudo chmod 710 /etc/bitcoin
 ```
-6. Copy `bitcoin.conf` (under `config` folder of this repo) to the path `/etc/bitcoin/bitcoin.conf`
-7. Make sure the file permissions are correct:
+2. Copy `bitcoin.conf` (under `config` folder of this repo) to the path `/etc/bitcoin/bitcoin.conf`
+3. Make sure the file permissions are correct:
 ```
 sudo chown bitcoin:bitcoin /etc/bitcoin/bitcoin.conf
 sudo chmod 400 /etc/bitcoin/bitcoin.conf
