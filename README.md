@@ -587,6 +587,19 @@ After that restart the service:
 sudo systemctl restart electrumx
 ```
 
+### Compact history script
+
+To fix the following error:
+
+    struct.error: 'H' format requires 0 <= number <= 65535
+
+Use the following script as `electrumx` user
+
+    set -o allexport; source /etc/electrumx/electrumx.conf; set +o allexport; ./electrumx_compact_history
+
+Source: https://github.com/kyuupichan/electrumx/issues/185
+
+
 ### Further reading material:
 
 - https://freedomnode.com/blog/how-to-install-an-electrum-server-using-full-bitcoin-node-and-electrumx/
