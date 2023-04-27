@@ -45,15 +45,15 @@ Group=bitcoin
 
 # /run/bitcoind
 RuntimeDirectory=bitcoind
-RuntimeDirectoryMode=0710
+RuntimeDirectoryMode=0750
 
 # /etc/bitcoin
 ConfigurationDirectory=bitcoin
-ConfigurationDirectoryMode=0710
+ConfigurationDirectoryMode=0750
 
 # /var/lib/bitcoind
 StateDirectory=bitcoind
-StateDirectoryMode=0710
+StateDirectoryMode=0750
 
 # Hardening measures
 ####################

@@ -169,7 +169,7 @@ You can follow the progress in the file `/var/lib/bitcoind/debug.log`.
 
 You can query your bitcoin node from the command line using `bitcoin-cli`.
 
-For this use case it's best to assume the role of the `bitcoin` user. Type the following command:
+For this you would need to assume the role of the `bitcoin` user. Type the following command:
 ```bash
 su bitcoin
 ```
@@ -186,19 +186,29 @@ bitcoin-cli -datadir=/var/lib/bitcoind getconnectioncount
 ```
 A full documentation of the RPC commands can be found here: https://developer.bitcoin.org/reference/rpc/
 
-If you don't want to always add the `-datadir` argument there are two options:
-1. Create a bash alias that includes the argument
-2. Create the following symlink:
+### Running bitcoin-cli from admin user
+
+It's annoying to always switch to the `bitcoin` user and type the `-datadir` argument
+for the command. To get around it you can add the following line to the file `/home/admin/.bash_aliases`:
 ```bash
-cd
-ln -s /var/lib/bitcoind .bitcoin
+alias bitcoin-cli="sudo -u bitcoin bitcoin-cli -datadir=/var/lib/bitcoind"
+```
+
+Take the changes in the file into effect to the current shell session:
+```bash
+source /home/admin/.bash_aliases
+```
+
+Now you can simply run the following command as the `admin` user:
+```bash
+bitcoin-cli getconnectioncount
 ```
 
 If you are like me and don't remember the config and data directories by heart you can make the
-following symbolic links to the bitcoin user's home directory so that you find the relevant
+following symbolic links to the admin user's home directory so that you find the relevant
 directories easily:
 ```bash
 cd
-ln -s /etc/bitcoin config
-ln -s /var/lib/bitcoind data
+ln -s /etc/bitcoin bitcoind-config
+ln -s /var/lib/bitcoind bitcoind-data
 ```
