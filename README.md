@@ -174,15 +174,20 @@ mandb
 
 Documentation: https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
 
+Install git:
+```bash
+sudo apt install git
+```
+
 1. Clone the git repository
 ```
 cd /home/admin
 git clone https://github.com/bitcoin/bitcoin.git
 ```
-2. Checkout the correct version tag. Replace `v22.0` with the desired tag.
+2. Checkout the correct version tag. Replace `v24.0.1` with the desired tag.
 ```
 cd bitcoin
-git checkout tags/v22.0 -b tags/v22.0
+git checkout tags/v24.0.1 -b tags/v24.0.1
 ```
 3. Install Ubuntu build requirements
 ```
@@ -190,8 +195,14 @@ sudo apt-get install build-essential libtool autotools-dev automake pkg-config b
 ```
 4. Install bitcoind dependencies
 ```
-sudo apt-get install libevent-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev
+sudo apt-get install libevent-dev libboost-dev
 ```
+
+ZMQ dependencies (provides ZMQ API):
+```bash
+sudo apt-get install libzmq3-dev
+```
+
 5. Build bitcoind
 ```
 ./autogen.sh
@@ -209,7 +220,7 @@ sudo make install
 ```
 sudo mkdir /etc/bitcoin
 sudo chown bitcoin:bitcoin /etc/bitcoin
-sudo chmod 710 /etc/bitcoin
+sudo chmod 750 /etc/bitcoin
 ```
 2. Copy `bitcoin.conf` (under `config` folder of this repo) to the path `/etc/bitcoin/bitcoin.conf`
 3. Make sure the file permissions are correct:
