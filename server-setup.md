@@ -23,6 +23,11 @@ adduser admin
 usermod -aG sudo admin
 ```
 
+Limit home folder permissions
+```bash
+sudo chmod 700 /home/admin
+```
+
 3. Now logout the `root` user session
 
 From now on any administrative tasks will be done with the `admin` user account using the `sudo` command.

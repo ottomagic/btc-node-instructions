@@ -12,7 +12,6 @@ sudo usermod -aG bitcoin admin
 ```
 Limit home folder permissions
 ```bash
-sudo chmod 700 /home/admin
 sudo chmod 750 /home/bitcoin
 ```
 
