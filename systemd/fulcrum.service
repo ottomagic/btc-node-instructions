@@ -1,0 +1,44 @@
+[Unit]
+Description=Fulcrum
+
+# https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/Fulcrum \
+                        --pidfile /run/fulcrum/fulcrum.pid \
+                        --fast-sync 10000 \
+                        /home/fulcrum/fulcrum.conf
+
+# Run as fulcrum:fulcrum
+User=fulcrum
+Group=fulcrum
+
+TimeoutStopSec=30min
+
+# Hardening measures
+####################
+
+# Provide a private /tmp and /var/tmp.
+PrivateTmp=true
+
+# Mount /usr, /boot/ and /etc read-only for the process.
+ProtectSystem=full
+
+# Deny access to /home, /root and /run/user
+#ProtectHome=true
+
+# Disallow the process and all of its children to gain
+# new privileges through execve().
+NoNewPrivileges=true
+
+# Use a new /dev namespace only populated with API pseudo devices
+# such as /dev/null, /dev/zero and /dev/random.
+PrivateDevices=true
+
+# Deny the creation of writable and executable memory mappings.
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
