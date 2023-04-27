@@ -148,6 +148,7 @@ ssl = 0.0.0.0:50002
 cert = /home/fulcrum/ssl-certs/server.crt
 key = /home/fulcrum/ssl-certs/server.key
 tls-disallow-deprecated = true
+peering = false
 pidfile = /run/fulcrum/fulcrum.pid
 ```
 
