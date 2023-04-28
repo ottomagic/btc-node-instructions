@@ -149,7 +149,8 @@ cert = /home/fulcrum/ssl-certs/server.crt
 key = /home/fulcrum/ssl-certs/server.key
 tls-disallow-deprecated = true
 peering = false
-pidfile = /run/fulcrum/fulcrum.pid
+# Adjust fast-sync value based on available memory. The value is in MB.
+fast-sync = 10000
 ```
 
 ## 8. Configure firewall
@@ -199,17 +200,16 @@ sudo systemctl enable fulcrum
 
 ## 10. Wait for synchronization to finish
 
-Once sync is finished remove the following parameter from the `/lib/systemd/system/fulcrum.service` service config file:
+Once sync is finished remove the following parameter from the `/home/fulcrum/fulcrum.conf` service config file by commenting it out:
 ```
---fast-sync 10000 \
-```
-
-Reload the new config:
-```bash
-sudo systemctl daemon-reload
+fast-sync = 10000
 ```
 
-Restart the service:
+Restart the service for changes to take effect:
 ```bash
 sudo systemctl restart fulcrum
 ```
+
+## zmq
+
+Optional: For best results, enable zmq for the "hasblock" topic using e.g. zmqpubhashblock=tcp://0.0.0.0:8433 in your bitcoin.conf file (zmq is only available on: Core, BCHN, BU 1.9.1+, or Litecoin Core).

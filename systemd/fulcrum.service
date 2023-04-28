@@ -6,15 +6,13 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/Fulcrum \
-                        --pidfile /run/fulcrum/fulcrum.pid \
-                        --fast-sync 10000 \
-                        /home/fulcrum/fulcrum.conf
+ExecStart=/usr/local/bin/Fulcrum /home/fulcrum/fulcrum.conf
 
 # Run as fulcrum:fulcrum
 User=fulcrum
 Group=fulcrum
 
+LimitNOFILE=8192
 TimeoutStopSec=30min
 
 # Hardening measures
