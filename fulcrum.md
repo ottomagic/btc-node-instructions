@@ -149,7 +149,7 @@ key = /home/fulcrum/ssl-certs/server.key
 tls-disallow-deprecated = true
 peering = false
 # Adjust fast-sync value based on available memory. The value is in MB.
-fast-sync = 10000
+fast-sync = 6000
 ```
 
 ## 8. Configure firewall
