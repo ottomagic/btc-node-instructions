@@ -46,10 +46,11 @@ On Ubuntu the group is called `debian-tor`. We need to add the `bitcoin` user to
 sudo usermod -aG debian-tor bitcoin
 ```
 
-Uncomment (remove preceding `#`) the following two lines in the file `/etc/bitcoin/bitcoin.conf`:
+Enable/uncomment the following settings in the file `/etc/bitcoin/bitcoin.conf`:
 ```dotenv
+listenonion=1
 debug=tor
-proxy=127.0.0.1:9050
+onion=127.0.0.1:9050
 ```
 
 Restart bitcoind to have the changes take effect:
