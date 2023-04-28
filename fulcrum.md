@@ -143,7 +143,6 @@ Edit the following values in the config file:
 datadir = /home/fulcrum/database
 rpcuser = fulcrum
 rpcpassword = REPLACE_THIS_WITH_GENERATED_PASSWORD
-tcp = disabled
 ssl = 0.0.0.0:50002
 cert = /home/fulcrum/ssl-certs/server.crt
 key = /home/fulcrum/ssl-certs/server.key
